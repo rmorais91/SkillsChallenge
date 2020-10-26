@@ -1,0 +1,43 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="dynamic-form">
+    <mat-card fxFlex="60%">
+        <h2>Dynamic Form</h2>
+        <form [formGroup]="form">
+            <div *ngFor="let field of jsonFields">
+
+                <!-- Text -->
+                <mat-form-field *ngIf="field.type == 'text'" fxFlex="100%">
+                    <mat-label>{{field.label}}</mat-label>
+                    <input matInput [name]="field.name" [formControlName]="field.name" [value]="field.value">
+                </mat-form-field>
+
+                <!-- list -->
+                <div *ngIf="field.type == 'list'" fxFlex="100%">
+                    <mat-label>{{field.label}}</mat-label>
+                    <mat-selection-list [formControlName]="field.name">
+                        <mat-list-option *ngFor="let value of field.values" [value]="value.value">
+                            {{value.label}}
+                        </mat-list-option>
+                    </mat-selection-list>
+                </div>
+
+                <!-- Select List -->
+                <mat-form-field *ngIf="field.type == 'selection'" fxFlex="100%">
+                    <mat-label>{{field.label}}</mat-label>
+                    <mat-select [formControlName]="field.name">
+                        <mat-option *ngFor="let value of field.values" [value]="value.value">
+                            {{value.label}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+        </form>
+
+        <div fxLayoutAlign="end center" class="reset-button">
+            <button mat-raised-button color="primary" (click)="resetForm()">Reset Form</button>
+        </div>
+        
+
+    </mat-card>
+</div> 

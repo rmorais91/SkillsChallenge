@@ -1,27 +1,84 @@
-# SkillsWorkflowForm
+# Angular Dynamic Form Challenge
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
+## NPM packages
 
-## Development server
+* `npm install --save @angular/material @angular/cdk`.
+* `npm install @angular/flex-layout --save`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Components
 
-## Code scaffolding
+##### Header Skills
+**Descrição**: Cabeçalho do projeto.
+**Input**: Titulo do cabeçalho
+```html
+<app-header-skills [title]="'Angular Dynamic Form Challenge'"></app-header-skills>
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+##### Dynamic Form Skills
+**Descrição**: Componente que constroi formulário dinamicamente.
+Os campos do formulário podem ser de 3 tipos
+* text
+* selection
+* list
 
-## Build
+**Input**: JSON com a definição do formulário a construir.
+```json
+  jsonFields = [
+    {
+      type: 'text',
+      label: 'Nome Completo',
+      name: 'nome',
+      value: ''
+    },
+    {
+      type: 'text',
+      label: 'Morada',
+      name: 'morada',
+      value: ''
+    },
+    {
+      type: 'selection',
+      label: 'País',
+      name: 'pais',
+      values: [
+        { value: 'pt', label: 'Portugal' },
+        { value: 'es', label: 'Espanha' },
+        { value: 'fr', label: 'França' }
+      ]
+    },
+    {
+      type: 'selection',
+      label: 'Cidade',
+      name: 'cidade',
+      values: [
+        { value: 'lis', label: 'Lisboa' },
+        { value: 'por', label: 'Porto' },
+        { value: 'vis', label: 'Viseu' }
+      ]
+    },
+    {
+      type: 'list',
+      label: 'Hobbies',
+      name: 'hobbies',
+      values: [
+        { value: 'ler', label: 'Ler' },
+        { value: 'desporto', label: 'Desporto' },
+        { value: 'jogar', label: 'Jogar' },
+        { value: 'jardinagem', label: 'Jardinagem' }
+      ]
+    },
+  ];
+  ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+**Output**: Valores do formulário.
+```html
+<app-dynamic-form-skills [jsonFields]="jsonFields" (newformValues)="getFormValues($event)"></app-dynamic-form-skills>
+```
 
-## Running unit tests
+##### Dynamic Form Skills Result
+**Descrição**: Valores preenchidos no formulário dinamico.
+**Input**: Resultado do formulário.
+```html
+<app-dynamic-form-skills-result [formResult]="formResult"></app-dynamic-form-skills-result>
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
